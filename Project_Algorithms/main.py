@@ -1,8 +1,6 @@
-import getopt
 import sys
 from collections import Counter
 import argparse
-
 
 data_training = []
 data_testing = []
@@ -15,34 +13,24 @@ kValueList = []
 def Results():
     count0 = 0;
     correct0 = 0;
-    accuracy0 = 0;
     count1 = 0;
     correct1 = 0;
-    accuracy1 = 0;
     count2 = 0;
     correct2 = 0;
-    accuracy2 = 0;
     count3 = 0;
     correct3 = 0;
-    accuracy3 = 0;
     count4 = 0;
     correct4 = 0;
-    accuracy4 = 0;
     count5 = 0;
     correct5 = 0;
-    accuracy5 = 0;
     count6 = 0;
     correct6 = 0;
-    accuracy6 = 0;
     count7 = 0;
     correct7 = 0;
-    accuracy7 = 0;
     count8 = 0;
     correct8 = 0;
-    accuracy8 = 0;
     count9 = 0;
     correct9 = 0;
-    accuracy9 = 0;
 
     for data_test in data_testing:
 
@@ -388,6 +376,8 @@ def main(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument('--test-file', help='path of test file', required=True)
     parser.add_argument('--train-file', help='path of train file', required=True)
+    parser.add_argument('-a', '--algorithm', help='Algorithms Available - , Nearest Neighbour, k-Nearest Neighbour', required=True)
+
     args = parser.parse_args()
     # print(args.test_file)
     # print(args.train_file)
@@ -395,8 +385,11 @@ def main(argv):
     load_testing_data(args.test_file)
     load_training_data(args.train_file)
 
-    nearestNeighbourAlgorithm()
 
+    if args.algorithm == "Nearest Neighbour":
+        nearestNeighbourAlgorithm()
+    elif args.algorithm == "k Nearest Neighbour":
+        kNearestNeighbourAlgorithm()
 
 
 if __name__ == "__main__":
