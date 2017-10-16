@@ -1,5 +1,8 @@
-from statistics import mode
+import getopt
+import sys
 from collections import Counter
+import argparse
+
 
 data_training = []
 data_testing = []
@@ -161,8 +164,8 @@ def display_testing_data():
         print ("Label - " + DataSet_TESTING.print_label(train_data))
         print (DataSet_TESTING.print_data_set(train_data))
 
-def load_training_data():
-    training_data_file = open("C:\\Users\\Alienware\\Downloads\\optdigits - Copy.tra", "r");
+def load_training_data(train_file):
+    training_data_file = open(train_file, "r");
 
     x = 1;
 
@@ -174,8 +177,8 @@ def load_training_data():
         data_training.insert(x - 1, ds)
         x += 1
 
-def load_testing_data():
-    testing_data_file = open("C:\\Users\\Alienware\\Downloads\\optdigits.tes - Copy.txt", "r");
+def load_testing_data(test_file):
+    testing_data_file = open(test_file, "r");
 
     x = 1;
 
@@ -345,7 +348,7 @@ def kNearestNeighbourAlgorithm():
 def kMeansAlgorithm():
     pass
 
-def main():
+def main(argv):
     # ds0 = DataSet_TRAINING([0, 1, 2, 3, 4,5], 0)
     # ds1 = DataSet_TRAINING([1,2,3,4,5], 1)
     # ds2 = DataSet_TRAINING([2,3,4,5,6], 2)
@@ -369,24 +372,35 @@ def main():
 
     # data_training.sort(key=lambda x: DataSet_TRAINING.print_distance(x))
 
-    load_training_data()
+    # load_training_data()
     # print("TRAINS")
     # display_training_data()
-    load_testing_data()
+    # load_testing_data()
     # print("TEST")
     # display_testing_data()
     # nearestNeighbourAlgorithm()
     # nearestNeighbourAlgorithm()
-    kNearestNeighbourAlgorithm()
-
-
-
+    # kNearestNeighbourAlgorithm()
 
     # l3 = [((l1[i]-l2[i])**2) for i in range(len(l1))]
 
+    # print (sys.argv[1:])
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--test-file', help='path of test file', required=True)
+    parser.add_argument('--train-file', help='path of train file', required=True)
+    args = parser.parse_args()
+    # print(args.test_file)
+    # print(args.train_file)
+
+    load_testing_data(args.test_file)
+    load_training_data(args.train_file)
+
+    nearestNeighbourAlgorithm()
+
+
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
 
 
 
